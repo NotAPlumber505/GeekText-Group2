@@ -1,6 +1,6 @@
 package com.geektext.repository;
 
-import com.geektext.model.Book;
+import com.geektext.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
-public class GenreRepository {
+public interface GenreRepository extends JpaRepository<Genre, Long> {
 }

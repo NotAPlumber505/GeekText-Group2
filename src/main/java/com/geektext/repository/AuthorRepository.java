@@ -1,6 +1,6 @@
 package com.geektext.repository;
 
-import com.geektext.model.Book;
+import com.geektext.model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
-public class AuthorRepository {
+public interface AuthorRepository extends JpaRepository<Author, Long> {
 }
