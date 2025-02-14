@@ -1,4 +1,4 @@
-package com.geektext.model;
+package com.bookBrowser.model;
 
 import lombok.Data;
 

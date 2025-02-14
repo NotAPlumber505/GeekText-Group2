@@ -1,7 +1,7 @@
-package com.geektext.controller;
+package com.bookBrowser.controller;
 
-import com.geektext.model.Genre;
-import com.geektext.repository.GenreRepository;
+import com.bookBrowser.model.Genre;
+import com.bookBrowser.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

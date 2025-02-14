@@ -1,4 +1,4 @@
-package com.geektext.model;
+package com.bookBrowser.model;
 
 import lombok.Data;
 
@@ -7,13 +7,12 @@ import java.util.List;
 
 @Data
 @Entity
-public class Author {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long authorId;
-    private String firstName;
-    private String lastName;
+    private Long genreId;
+    private String genreName;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "genre")
     private List<Book> books;
 }
