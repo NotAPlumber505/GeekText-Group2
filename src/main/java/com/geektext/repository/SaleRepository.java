@@ -1,7 +1,7 @@
 package com.geektext.repository;
 
-import com.geektext.model.Book;
+import com.geektext.model.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class SaleRepository {
+public interface SaleRepository extends JpaRepository<Sale, Long> {
 }
