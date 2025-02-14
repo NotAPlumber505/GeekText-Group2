@@ -1,0 +1,14 @@
+# Ignore MySQL dump files
+*.sql
+*.sql.gz
+
+# Ignore MySQL data directory (if it exists locally)
+mysql-data/
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
