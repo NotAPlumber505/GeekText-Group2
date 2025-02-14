@@ -1,6 +1,6 @@
-package com.geektext.repository;
+package com.bookBrowser.repository;
 
-import com.geektext.model.Book;
+import com.bookBrowser.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
