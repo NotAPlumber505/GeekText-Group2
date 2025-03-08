@@ -5,6 +5,10 @@ import com.Springpro.Springpro.Entity.Rating;
 import com.Springpro.Springpro.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.HashMap;
 
 import java.util.Optional;
 
@@ -13,7 +17,7 @@ public class StudentService {
 
     @Autowired
     private StudentRepo studentRepo;
-
+/*
     public Student saveDetails(Student student) {
         return studentRepo.save(student);
     }
@@ -42,6 +46,8 @@ public class StudentService {
 
         return (double) sum / student.getRatings().size();
     }
+
+ */
 }
 
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
-
+/*
     @Autowired
     private StudentService studentService;
 
@@ -20,4 +20,6 @@ public class StudentController {
     public Student fetchDetailsById(@PathVariable int id) {
         return studentService.getDetailsById(id);
     }
+
+ */
 }
