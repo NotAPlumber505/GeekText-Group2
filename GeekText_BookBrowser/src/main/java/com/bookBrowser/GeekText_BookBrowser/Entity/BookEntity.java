@@ -26,4 +26,7 @@ public class BookEntity {
     @Column(name = "AUTHOR ID")
     private int authorId;
 
+    @Column (name = "SALE QUANTITY")
+    private int saleQuantity;
+
 }

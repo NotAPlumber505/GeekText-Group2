@@ -6,7 +6,7 @@ import com.bookBrowser.GeekText_BookBrowser.Repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
+import java.util.List;
 
 @Service
 public class BookService {
@@ -20,9 +20,18 @@ public class BookService {
 
     }
 
-    public BookEntity getBookDetailsByGenreID(int bookId) {
+    public BookEntity getBookDetailsById(int bookId) {
 
         return bookRepo.findById(bookId).orElse(null);
 
     }
+
+    public List<BookEntity> getBooksByGenre(int genreId) {
+        return bookRepo.findByGenreId(genreId);
+    }
+
+    public List<BookEntity> getTopSellingBooks() {
+        return bookRepo.findTop10ByOrderBySaleQuantityDesc();
+    }
+
 }
