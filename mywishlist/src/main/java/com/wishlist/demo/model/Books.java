@@ -3,7 +3,7 @@ package com.wishlist.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "books")  // Ensure this matches your database table name
+@Table(name = "books")
 public class Books {
     
     @Id
@@ -12,20 +12,22 @@ public class Books {
 
     private String title;
 
-    private Long wishlist_id;
+    @Column(name = "wishlist_id")
+    private Long wishlistId;
 
-    // Constructors, Getters, and Setters
+    // Constructors
     public Books() {}
 
-    public Books(String title, Long wishlist_id) {
+    public Books(String title, Long wishlistId) {
         this.title = title;
-        this.wishlist_id = wishlist_id;
+        this.wishlistId = wishlistId;
     }
 
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
-    public Long getWishlistId() { return wishlist_id; }
-    public void setWishlistId(Long wishlist_id) { this.wishlist_id = wishlist_id; }
+    public Long getWishlistId() { return wishlistId; }
+    public void setWishlistId(Long wishlistId) { this.wishlistId = wishlistId; }
 }

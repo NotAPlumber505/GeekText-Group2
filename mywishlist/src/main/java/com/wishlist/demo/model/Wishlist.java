@@ -12,10 +12,9 @@ public class Wishlist {
     private Long id;
     
     private String name;
-
     private LocalDate date;
 
-    @Column(name = "user_id")  // Maps it correctly to the database
+    @Column(name = "user_id")
     private Long userId;
 
     // Constructors
