@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Data
-@Table(name = "student_db") // Cambiar a "student" si representa un estudiante
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "student_db")
 public class Student {
 
     @Id
@@ -25,6 +22,45 @@ public class Student {
     private String name;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore // Evita ciclos infinitos en JSON
-    private List<Rating> ratings;
+    @JsonIgnore     private List<Rating> ratings;
+
+    public Student() {}
+
+    public Student(int mark, String name) {
+        this.mark = mark;
+        this.name = name;
+    }
+
+    // Getters y Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 }

@@ -18,18 +18,20 @@ import java.util.HashMap;
 
 
 @Entity
-@Data
 @Table(name = "rating")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id", nullable = false)
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
     @Column(name = "rating")
     private Double rating;
@@ -37,20 +39,38 @@ public class Rating {
     @Column(name = "comment", length = 500)
     private String comment;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    public Rating() {}
 
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
-
-    public int getUserId() {
-        return userId;
+    public Rating(Student student, Book book, Double rating, String comment) {
+        this.student = student;
+        this.book = book;
+        this.rating = rating;
+        this.comment = comment;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    // Getters y Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Double getRating() {
@@ -67,18 +87,5 @@ public class Rating {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-
-    public void setStudent(Student student) {
-        this.userId = userId;
     }
 }

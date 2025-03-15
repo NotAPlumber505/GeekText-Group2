@@ -27,7 +27,8 @@ public class RatingService {
     @Autowired
     private StudentRepo studentRepo;
 
-    public Rating addRating(int userId, int bookId, double ratingValue) {
+    // Agregar calificación
+    public Rating addRating(int studentId, int bookId, double ratingValue) {
         if (ratingValue < 0 || ratingValue > 5) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Rating must be between 0 and 5.");
         }
@@ -35,11 +36,10 @@ public class RatingService {
         Book book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found."));
 
-        Student student = studentRepo.findById(userId)
+        Student student = studentRepo.findById(studentId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found."));
 
         Rating rating = new Rating();
-        rating.setUserId(userId);
         rating.setRating(ratingValue);
         rating.setBook(book);
         rating.setStudent(student); // Asigna el estudiante
@@ -47,7 +47,8 @@ public class RatingService {
         return ratingRepo.save(rating);
     }
 
-    public Rating addComment(int userId, int bookId, String comment) {
+    // Agregar comentario
+    public Rating addComment(int studentId, int bookId, String comment) {
         if (comment == null || comment.isEmpty() || comment.length() > 500) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Comment must be between 1 and 500 characters.");
         }
@@ -55,34 +56,44 @@ public class RatingService {
         Book book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found."));
 
+        Student student = studentRepo.findById(studentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found."));
+
         Rating rating = new Rating();
-        rating.setUserId(userId);
         rating.setComment(comment);
         rating.setBook(book);
+        rating.setStudent(student); // Se asigna correctamente el estudiante
 
         return ratingRepo.save(rating);
     }
 
+    // Obtener comentarios por libro
     public List<Map<String, Object>> getCommentsByBookId(int bookId) {
-        List<Rating> ratings = ratingRepo.findByBookId(bookId);
+        Book book = bookRepo.findById(bookId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found."));
+
+        List<Rating> ratings = ratingRepo.findByBook(book);
         return ratings.stream()
                 .map(rating -> {
                     Map<String, Object> commentMap = new HashMap<>();
-                    commentMap.put("userId", rating.getUserId());
+                    commentMap.put("studentName", rating.getStudent().getName()); // Ahora usamos student
                     commentMap.put("comment", rating.getComment());
                     return commentMap;
                 })
                 .collect(Collectors.toList());
     }
 
+    // Obtener promedio de calificaciones de un libro
     public double getAverageRatingByBookId(int bookId) {
-        List<Rating> ratings = ratingRepo.findByBookId(bookId);
+        Book book = bookRepo.findById(bookId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found."));
+
+        List<Rating> ratings = ratingRepo.findByBook(book);
         return ratings.stream()
                 .filter(r -> r.getRating() != null)
                 .mapToDouble(Rating::getRating)
                 .average()
                 .orElse(0.0);
     }
-
-
 }
+
