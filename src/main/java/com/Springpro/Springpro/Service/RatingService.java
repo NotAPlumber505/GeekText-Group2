@@ -27,7 +27,7 @@ public class RatingService {
     @Autowired
     private StudentRepo studentRepo;
 
-    // Agregar calificación
+    // Add Rating
     public Rating addRating(int studentId, int bookId, double ratingValue) {
         if (ratingValue < 0 || ratingValue > 5) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Rating must be between 0 and 5.");
@@ -42,12 +42,12 @@ public class RatingService {
         Rating rating = new Rating();
         rating.setRating(ratingValue);
         rating.setBook(book);
-        rating.setStudent(student); // Asigna el estudiante
+        rating.setStudent(student);
 
         return ratingRepo.save(rating);
     }
 
-    // Agregar comentario
+    // Add comment
     public Rating addComment(int studentId, int bookId, String comment) {
         if (comment == null || comment.isEmpty() || comment.length() > 500) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Comment must be between 1 and 500 characters.");
@@ -62,12 +62,12 @@ public class RatingService {
         Rating rating = new Rating();
         rating.setComment(comment);
         rating.setBook(book);
-        rating.setStudent(student); // Se asigna correctamente el estudiante
+        rating.setStudent(student); // Verify the student
 
         return ratingRepo.save(rating);
     }
 
-    // Obtener comentarios por libro
+    // Get comments by book
     public List<Map<String, Object>> getCommentsByBookId(int bookId) {
         Book book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found."));
@@ -76,14 +76,14 @@ public class RatingService {
         return ratings.stream()
                 .map(rating -> {
                     Map<String, Object> commentMap = new HashMap<>();
-                    commentMap.put("studentName", rating.getStudent().getName()); // Ahora usamos student
+                    commentMap.put("studentName", rating.getStudent().getName()); //This is to het the name of the person who put this comment
                     commentMap.put("comment", rating.getComment());
                     return commentMap;
                 })
                 .collect(Collectors.toList());
     }
 
-    // Obtener promedio de calificaciones de un libro
+    // Get average rating from a book
     public double getAverageRatingByBookId(int bookId) {
         Book book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found."));

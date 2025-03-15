@@ -21,13 +21,13 @@ public class RatingController {
         this.ratingService = ratingService;
     }
 
-    // Agregar calificación
+    // Add rating to a book
     @PostMapping("/add/ratings")
     public ResponseEntity<?> addRating(@RequestBody RatingRequest ratingRequest) {
         try {
             if (ratingRequest.getStudentId() <= 0 || ratingRequest.getBookId() <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Student ID y Book ID deben ser valores válidos.");
+                        .body("Student ID and Book ID need to be  valid values.");
             }
 
             Rating rating = ratingService.addRating(
@@ -38,21 +38,21 @@ public class RatingController {
             return ResponseEntity.ok(rating);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al agregar calificación: " + e.getMessage());
+                    .body("Error adding rating: " + e.getMessage());
         }
     }
 
-    // Agregar comentario
+    // Add comment to a book
     @PostMapping("/add/comment")
     public ResponseEntity<?> addComment(@RequestBody RatingRequest ratingRequest) {
         try {
             if (ratingRequest.getStudentId() <= 0 || ratingRequest.getBookId() <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Student ID y Book ID deben ser valores válidos.");
+                        .body("Student ID and Book ID need to be valid values.");
             }
             if (ratingRequest.getComment() == null || ratingRequest.getComment().isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("El comentario no puede estar vacío.");
+                        .body("The comment can't be empty.");
             }
 
             Rating rating = ratingService.addComment(
@@ -63,27 +63,27 @@ public class RatingController {
             return ResponseEntity.ok(rating);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al agregar comentario: " + e.getMessage());
+                    .body("Error adding comment: " + e.getMessage());
         }
     }
 
-    // Obtener comentarios por libro
+    // Gets comments by book
     @GetMapping("/comments/{bookId}")
     public ResponseEntity<?> getComments(@PathVariable int bookId) {
         try {
             List<Map<String, Object>> comments = ratingService.getCommentsByBookId(bookId);
             if (comments.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("No hay comentarios para este libro.");
+                        .body("There are not comments for this book.");
             }
             return ResponseEntity.ok(comments);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al obtener comentarios: " + e.getMessage());
+                    .body("Error getting comments: " + e.getMessage());
         }
     }
 
-    // Obtener promedio de calificación por libro
+    // Get average rating for book
     @GetMapping("/{bookId}/average-rating")
     public ResponseEntity<?> getAverageRating(@PathVariable int bookId) {
         try {
@@ -91,11 +91,11 @@ public class RatingController {
             return ResponseEntity.ok(Map.of("bookId", bookId, "averageRating", average));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al obtener el promedio de calificación: " + e.getMessage());
+                    .body("Error getting average rating: " + e.getMessage());
         }
     }
 
-    // Clase interna para recibir solicitudes de calificación y comentarios
+    // Internal class to get request of rating and comments
     static class RatingRequest {
         private int studentId;
         private int bookId;
