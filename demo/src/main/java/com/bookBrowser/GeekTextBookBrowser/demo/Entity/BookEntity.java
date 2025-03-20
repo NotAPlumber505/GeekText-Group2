@@ -29,4 +29,7 @@ public class BookEntity {
     @Column (name = "SALE QUANTITY")
     private int saleQuantity;
 
+    @Column(name = "RATING")
+    private int rating;
+
 }

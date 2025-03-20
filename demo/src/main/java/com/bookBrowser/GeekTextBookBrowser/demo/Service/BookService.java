@@ -33,4 +33,8 @@ public class BookService {
         return bookRepo.findTop10ByOrderBySaleQuantityDesc();
     }
 
+    public List<BookEntity> getBooksByRating(int rating) {
+        return bookRepo.findBookByRating(rating);
+    }
+
 }

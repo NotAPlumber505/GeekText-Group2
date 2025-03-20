@@ -36,7 +36,11 @@ public class BookController {
     public List<BookEntity> fetchTopSellers() {
 
         return bookService.getTopSellingBooks();
+    }
 
+    @GetMapping("/getBookByRating/{rating}")
+    public List<BookEntity> fetchBooksByRating(@PathVariable int rating) {
+        return bookService.getBooksByRating(rating);
     }
 
 }
