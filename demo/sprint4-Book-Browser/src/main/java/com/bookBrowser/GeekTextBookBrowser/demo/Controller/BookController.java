@@ -3,6 +3,7 @@ package com.bookBrowser.GeekTextBookBrowser.demo.Controller;
 import com.bookBrowser.GeekTextBookBrowser.demo.Service.BookService;
 import com.bookBrowser.GeekTextBookBrowser.demo.Entity.BookEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,8 +40,18 @@ public class BookController {
     }
 
     @GetMapping("/getBookByRating/{rating}")
-    public List<BookEntity> fetchBooksByRating(@PathVariable int rating) {
+    public List<BookEntity> fetchBooksByRating(@PathVariable double rating) {
         return bookService.getBooksByRating(rating);
+    }
+
+    @PutMapping("/applyDiscount")
+    public ResponseEntity<String> applyDiscount(@RequestParam double discountPercentage, @RequestParam String publisher) {
+
+        // Call service to apply discount
+        bookService.applyDiscountToPublisher(discountPercentage, publisher);
+
+        // Return a success message
+        return ResponseEntity.ok("Discount applied successfully to publisher: " + publisher);
     }
 
 }

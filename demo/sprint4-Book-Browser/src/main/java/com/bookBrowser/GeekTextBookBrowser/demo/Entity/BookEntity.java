@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @Table(name = "Book_DB")
@@ -17,7 +19,7 @@ public class BookEntity {
     @GeneratedValue
     private int bookId;
 
-    @Column(name = "BOOK TITLE")
+    @Column(name = "BOOK TITLE", precision = 255, nullable = false)
     private String title;
 
     @Column(name = "GENRE ID")
@@ -30,6 +32,12 @@ public class BookEntity {
     private int saleQuantity;
 
     @Column(name = "RATING")
-    private int rating;
+    private double rating;
+
+    @Column(name = "PRICE", columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal price;
+
+    @Column(name = "PUBLISHER", precision = 255, nullable = false)
+    private String publisher;
 
 }
