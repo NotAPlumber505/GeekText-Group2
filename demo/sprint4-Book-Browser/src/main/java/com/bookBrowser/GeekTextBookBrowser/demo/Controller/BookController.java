@@ -35,7 +35,6 @@ public class BookController {
 
     @GetMapping("/topSellers")
     public List<BookEntity> fetchTopSellers() {
-
         return bookService.getTopSellingBooks();
     }
 
