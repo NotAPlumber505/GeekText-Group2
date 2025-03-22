@@ -16,8 +16,8 @@ public class BooksService {
         return booksRepo.save(books);
     }
 
-    public Books getBookDetailsByISBN(int isbn){
-        return booksRepo.findById(isbn).orElse(null);
+    public Books getBookDetailsByISBN(Long isbn){
+        return booksRepo.findByIsbn(isbn); // Use the correct method that accepts Long
     }
 
 }

@@ -35,7 +35,7 @@ public class Books {
     private int id;
 
     @Column(name = "ISBN", nullable = false, unique = true)
-    private int isbn;
+    private Long isbn;
 
     @Column(name = "book_name", length = 30)
     private String book_name;
@@ -44,6 +44,7 @@ public class Books {
     private String author;
 
     @Column(name = "author_ID", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private int authorId;
 
     @Column(name = "book_description", columnDefinition = "TEXT")
@@ -59,9 +60,9 @@ public class Books {
     private String publisher;
 
     @Column(name = "publish_year")
-    private int publishYear;
+    private Long publishYear;
 
     @Column(name = "sold_copies")
-    private int sold_copies;
+    private Long sold_copies;
 
 }
