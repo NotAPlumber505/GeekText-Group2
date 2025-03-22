@@ -21,7 +21,7 @@ public class BooksController {
     }
 
     @GetMapping("/getBookByISBN/{isbn}")
-    public Books fetchDetailsByISBN(@PathVariable int isbn){
+    public Books fetchDetailsByISBN(@PathVariable Long isbn){
         return booksService.getBookDetailsByISBN(isbn);
     }
 }
