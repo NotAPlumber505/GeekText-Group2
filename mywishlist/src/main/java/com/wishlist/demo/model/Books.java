@@ -1,6 +1,9 @@
 package com.wishlist.demo.model;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "books")
@@ -12,15 +15,15 @@ public class Books {
 
     private String title;
 
-    @Column(name = "wishlist_id")
-    private Long wishlistId;
+    @ManyToMany(mappedBy = "books")
+    @JsonBackReference // Prevents infinite recursion
+    private Set<Wishlist> wishlists = new HashSet<>();
 
     // Constructors
     public Books() {}
 
-    public Books(String title, Long wishlistId) {
+    public Books(String title) {
         this.title = title;
-        this.wishlistId = wishlistId;
     }
 
     // Getters and Setters
@@ -28,6 +31,12 @@ public class Books {
     public void setId(Long id) { this.id = id; }
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
-    public Long getWishlistId() { return wishlistId; }
-    public void setWishlistId(Long wishlistId) { this.wishlistId = wishlistId; }
+
+    public Set<Wishlist> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(Set<Wishlist> wishlists) {
+        this.wishlists = wishlists;
+    }
 }
