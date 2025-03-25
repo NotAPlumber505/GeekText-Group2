@@ -28,7 +28,7 @@ public class CreditCard {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference  // Prevents infinite recursion
+    @JsonBackReference  // Prevents infinite recursion.
     private User user;
 
 }

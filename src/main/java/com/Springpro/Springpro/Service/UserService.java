@@ -20,9 +20,9 @@ public class UserService {
     @Autowired
     private CreditCardRepo creditCardRepo;
 
-    public User saveDetails(User user) {
+    public void saveDetails(User user) {
 
-        return userRepo.save(user);
+        userRepo.save(user);
 
     }
 
@@ -38,7 +38,7 @@ public class UserService {
 
     }
 
-    public User updateUserByUsername(String username, User updatedUser) {
+    public void updateUserByUsername(String username, User updatedUser) {
         Optional<User> existingUserOpt = userRepo.findByUsername(username);
 
         if (existingUserOpt.isPresent()) {
@@ -50,7 +50,7 @@ public class UserService {
             if (updatedUser.getEmail() != null) existingUser.setEmail(updatedUser.getEmail());
             if (updatedUser.getAddress() != null) existingUser.setAddress(updatedUser.getAddress());
 
-            return userRepo.save(existingUser);
+            userRepo.save(existingUser);
         } else {
             throw new RuntimeException("User not found with username: " + username);
         }
