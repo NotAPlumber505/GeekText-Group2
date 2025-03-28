@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.HashMap;
 
+//Related to the new table created rating
 
 @Entity
 @Table(name = "rating")
