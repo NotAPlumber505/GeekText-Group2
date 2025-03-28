@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 
+//Related to the table student_db
+
 @Entity
 @Table(name = "student_db")
 public class Student {

@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Related to the table book_db
+
 @Entity
 @Data
 @Table(name = "book_db")
