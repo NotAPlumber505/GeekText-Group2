@@ -1,5 +1,6 @@
 package com.BookInfo.BookInfo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,7 +32,7 @@ public class Books {
     //All the variables
     @Id
     @Column(name = "ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "ISBN", nullable = false, unique = true)
@@ -43,10 +44,11 @@ public class Books {
     @Column(name = "author", length = 30)
     private String author;
 
-    @Column(name = "author_ID", nullable = false)
+    @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
-    private int authorId;
+    private Authors author_id;
 
+    @JsonProperty("book_description")
     @Column(name = "book_description", columnDefinition = "TEXT")
     private String bookDescription;
 
@@ -59,9 +61,11 @@ public class Books {
     @Column(name = "publisher", length = 30)
     private String publisher;
 
+    @JsonProperty("publish_year")
     @Column(name = "publish_year")
     private Long publishYear;
 
+    @JsonProperty("sold_copies")
     @Column(name = "sold_copies")
     private Long sold_copies;
 
