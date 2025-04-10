@@ -27,8 +27,8 @@ public class BookService {
 
     }
 
-    public List<BookEntity> getBooksByGenre(int genreId) {
-        return bookRepo.findByGenreId(genreId);
+    public List<BookEntity> getBooksByGenre(String genre) {
+        return bookRepo.findByGenre(genre);
     }
 
     public List<BookEntity> getTopSellingBooks() {
