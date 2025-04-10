@@ -58,6 +58,20 @@ public class CartService {
         return "Removed book " + bookId + " from cart " + cartId;
     }
 
+    public double calculateCartSubtotalByCartId(int cartId) {
+        Cart cart = cartRepo.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found with ID: " + cartId));
+
+        if (cart.getBooks() == null || cart.getBooks().isEmpty()) {
+            return 0.0;
+        }
+
+        return cart.getBooks()
+                .stream()
+                .mapToDouble(Book::getPrice)
+                .sum();
+    }
+
 
 
 }

@@ -56,6 +56,20 @@ public class CartController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("/subtotal")
+    public ResponseEntity<Map<String, Object>> getCartSubtotal(@RequestParam int cartId) {
+        try {
+            double subtotal = cartService.calculateCartSubtotalByCartId(cartId);
 
+            Map<String, Object> response = new HashMap<>();
+            response.put("cartId", cartId);
+            response.put("subtotal", subtotal);
 
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", e.getMessage()));
+        }
+    }
 }
