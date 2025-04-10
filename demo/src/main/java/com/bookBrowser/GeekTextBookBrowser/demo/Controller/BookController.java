@@ -28,14 +28,13 @@ public class BookController {
 
     }
 
-    @GetMapping("/getBookByGenre/{genreId}")
-    public List<BookEntity> fetchBooksByGenre(@PathVariable int genreId) {
-        return bookService.getBooksByGenre(genreId);
+    @GetMapping("/getBookByGenre/{genre}")
+    public List<BookEntity> fetchBooksByGenre(@PathVariable String genre) {
+        return bookService.getBooksByGenre(genre);
     }
 
     @GetMapping("/topSellers")
     public List<BookEntity> fetchTopSellers() {
-
         return bookService.getTopSellingBooks();
     }
 

@@ -22,8 +22,8 @@ public class BookEntity {
     @Column(name = "BOOK TITLE", precision = 255, nullable = false)
     private String title;
 
-    @Column(name = "GENRE ID")
-    private int genreId;
+    @Column(name = "GENRE", precision = 255, nullable = false)
+    private String genre;
 
     @Column(name = "AUTHOR ID")
     private int authorId;
