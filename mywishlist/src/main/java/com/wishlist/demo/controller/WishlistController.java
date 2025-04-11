@@ -75,4 +75,21 @@ public class WishlistController {
 
         return ResponseEntity.ok("Book added to wishlist successfully");
     }
+
+    @DeleteMapping("/{wishlistId}/remove-book/{bookId}")
+    @Transactional
+    public ResponseEntity<String> removeBookFromWishlist(@PathVariable Long wishlistId, @PathVariable Long bookId) {
+        Wishlist wishlist = wishlistRepository.findById(wishlistId)
+            .orElseThrow(() -> new RuntimeException("Wishlist not found"));
+        Books book = booksRepository.findById(bookId)
+            .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        if (wishlist.getBooks().remove(book)) {
+            wishlistRepository.save(wishlist);
+            return ResponseEntity.ok("Book removed from wishlist successfully");
+        } else {
+            return ResponseEntity.status(404).body("Book not found in wishlist");
+        }
+    }
+
 }
